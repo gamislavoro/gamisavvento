@@ -30,7 +30,8 @@
   <!-- HEADER con logo centrato -->
   <header class="bg-white/90 backdrop-blur sticky top-0 z-40 border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-center">
-      <img id="logoTop" alt="Logo Seminario" class="h-8 w-auto"/>
+      <!-- Inserisci QUI l'URL del logo (può essere assoluto o relativo) -->
+      <img id="logoTop" alt="Logo Seminario" class="h-8 w-auto" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/logo.png"/>
     </div>
   </header>
 
@@ -41,7 +42,8 @@
 
   <!-- HERO SAFE MODE: nessun overlay assoluto che copre -->
   <section class="relative">
-    <div id="heroBgSafe" class="w-full bg-cover bg-center min-h-[220px] md:min-h-[340px]"></div>
+    <!-- Inserisci QUI l'URL dell'immagine hero -->
+    <div id="heroBgSafe" class="w-full bg-cover bg-center min-h-[220px] md:min-h-[340px]" style="background-image:url('https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/hero.jpg')"></div>
     <div class="max-w-6xl mx-auto px-4 md:px-6 py-8">
       <div class="max-w-xl">
         <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">A Natale dona speranza</h1>
@@ -69,7 +71,8 @@
 
         <!-- BIRRA -->
         <article id="card-birra" class="bg-white rounded-2xl card overflow-hidden" data-kind="birra">
-          <img id="img-birra" class="h-40 w-full object-cover" alt="Birra"/>
+          <!-- Inserisci QUI l'URL dell'immagine birra -->
+          <img id="img-birra" class="h-40 w-full object-cover" alt="Birra" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/birra.jpg"/>
           <div class="p-4 space-y-4">
             <header class="flex items-center justify-between">
               <h3 class="font-semibold">Birra</h3>
@@ -97,7 +100,8 @@
 
         <!-- FELPA -->
         <article id="card-felpa" class="bg-white rounded-2xl card overflow-hidden" data-kind="felpa">
-          <img id="img-felpa" class="h-40 w-full object-cover" alt="Felpa"/>
+          <!-- Inserisci QUI l'URL dell'immagine felpa -->
+          <img id="img-felpa" class="h-40 w-full object-cover" alt="Felpa" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/felpa.jpg"/>
           <div class="p-4 space-y-4">
             <header class="flex items-center justify-between">
               <h3 class="font-semibold">Felpa</h3>
@@ -139,7 +143,8 @@
 
         <!-- CAPPELLO -->
         <article id="card-cappello" class="bg-white rounded-2xl card overflow-hidden" data-kind="cappello">
-          <img id="img-cappello" class="h-40 w-full object-cover" alt="Cappello"/>
+          <!-- Inserisci QUI l'URL dell'immagine cappello -->
+          <img id="img-cappello" class="h-40 w-full object-cover" alt="Cappello" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/cappello.jpg"/>
           <div class="p-4 space-y-4">
             <header class="flex items-center justify-between">
               <h3 class="font-semibold">Cappello</h3>
@@ -171,7 +176,8 @@
 
         <!-- DOLCI -->
         <article id="card-dolce" class="bg-white rounded-2xl card overflow-hidden" data-kind="dolce">
-          <img id="img-dolce" class="h-40 w-full object-cover" alt="Dolci"/>
+          <!-- Inserisci QUI l'URL dell'immagine dolci -->
+          <img id="img-dolce" class="h-40 w-full object-cover" alt="Dolci" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/dolci.jpg"/>
           <div class="p-4 space-y-4">
             <header class="flex items-center justify-between">
               <h3 class="font-semibold">Dolci</h3>
@@ -258,7 +264,8 @@
     <!-- CAUSA -->
     <section id="causa" class="pb-16">
       <div class="rounded-2xl overflow-hidden mb-6 card">
-        <div class="h-40 md:h-56 w-full bg-cover bg-center relative" id="causaBanner">
+        <!-- Inserisci QUI l'URL dell'immagine causa -->
+        <div class="h-40 md:h-56 w-full bg-cover bg-center relative" id="causaBanner" style="background-image:url('https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/causa.jpg')">
           <div class="absolute inset-0 bg-red-900/30 mix-blend-multiply"></div>
           <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-center text-white">
@@ -278,7 +285,8 @@
   <!-- FOOTER -->
   <footer class="mt-10 bg-slate-900 text-slate-100">
     <div class="max-w-6xl mx-auto px-4 md:px-6 py-8 flex flex-col items-center space-y-2 text-center">
-      <img id="logoFooter" alt="Logo Seminario" class="h-8 w-auto opacity-95"/>
+      <!-- Inserisci QUI lo stesso URL del logo se vuoi -->
+      <img id="logoFooter" alt="Logo Seminario" class="h-8 w-auto opacity-95" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/main/images/logo.png"/>
       <div>Via Papa Pio XI, 32 - Venegono Inferiore (VA)</div>
       <div class="text-xs opacity-80">© <span id="yearNow"></span> GAMis - Seminario Arcivescovile di Milano</div>
     </div>
@@ -286,30 +294,32 @@
 
 <script>
 // ===== CONFIG =====
-const ENDPOINT = "https://script.google.com/a/macros/seminario.milano.it/s/AKfycbyLq5FvkCvL50Eqc0ndTtHUSQuOKnOsKQK9wW5JgsnbzLQomnO4U6FpAUiUcWa-r2QNqw/exec"; 
-const IMAGES = {
-  hero:   "img/hero.jpg",
-  birra:  "img/birra.jpg",
-  felpa:  "img/felpa.jpg",
-  cappello:"img/cappello.jpg",
-  dolce:  "https://ibb.co/BVj3sPzJ",
-  causa:  "https://ibb.co/h1FX5Lw5",
-};
-const SEMINARISTI = ["— Seleziona —","Abbate don Nikolas", "Angelini don Andrea", "Bassi Andrea", "Bergamini don Gioele", "Bianchi don Giuseppe", "Altro…"];
-const LOGO_URL = "https://ibb.co/fYGVkwp2"; // Inserisci qui l'URL del logo
+const ENDPOINT = "https://script.google.com/a/macros/seminario.milano.it/s/AKfycbyLq5FvkCvL50Eqc0ndTtHUSQuOKnOsKQK9wW5JgsnbzLQomnO4U6FpAUiUcWa-r2QNqw/exec"; // <-- sostituisci con l'URL /exec della tua Web App
 
-// CONFIG prodotti + prezzi
+// (RIMOSSI: IMAGES, LOGO_URL, setImgSrc, setBgImage, IMG_FALLBACK, setup())
+
+const SEMINARISTI = ["— Seleziona —","Abbate don Nikolas", "Angelini don Andrea", "Bassi Andrea", "Bergamini don Gioele", "Bianchi don Giuseppe", "Bisi Federico", "Bolaños Josè", "Brancè don Samuele", "Caholo Gilberto", "Capizzi Emanuele", "Carchedi Davide", "Cardani Lorenzo", "Combi Fabio", "Conti Giacomo", "Corti Giovanni", "Crivellari Matteo", "Erroi Filippo", "Federico Bisi", "Ferrera Pietro", "Frattolillo don Nicolò", "Freddi Giacomo", "Garzone Alessandro", "Gazzoli Daniele", "Giovenzana Francesco", "Girelli Simone", "Gorno Riccardo", "Guido don Emanuele", "Landini Marco", "Lattuada Stefano", "Maccà don Paolo", "Macchi don Paolo", "Magistrelli don Stefano", "Marchiori Manuel", "Mariani Massimiliano", "Martinelli Samuele", "Mbala Simon", "Meda Francesco", "Mesiano Lorenzo", "Molteni don Lorenzo", "Nossa Alessandro", "Orfano Michele", "Pagani Carlo", "Palazzo Andrea", "Pandolfi Andrea", "Parini Giovanni", "Pasquot Filippo", "Perego Gianluca", "Rossi Alessandro", "Santambrogio Tommaso", "Sinigaglia Francesco", "Swich don Andrea", "Tamburrino Stefano", "Tchingui Moises", "Valli Giovanni", "Vicini Alessio", "Zannini Alessandro", "Zappaterra Matteo","Altro…"];
+
+// CONFIG prodotti + prezzi centralizzati (immutati)
 const OPTIONS = {
-  birra:   { price: 10 },
-  felpa:   { price: 25 },
-  cappello:{ price: 12 },
-  dolce:   { price: 10 }
+  birra:   { price: 10, chipGroups: { formato: ["Cassa da 6"] }, swatchGroups: {} },
+  felpa:   { price: 25,  chipGroups: { taglia: ["S","M","L","XL","XXL"] },
+             swatchGroups: { colore: [
+               {label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
+               {label:"Bordeaux",hex:"#7f1d1d"},{label:"Verde bosco",hex:"#14532d"},
+               {label:"Blu navy",hex:"#1e3a8a"} ] } },
+  cappello:{ price: 12,  chipGroups: {}, swatchGroups: { colore: [
+               {label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
+               {label:"Rosso",hex:"#ef4444"},{label:"Verde",hex:"#16a34a"},
+               {label:"Blu",hex:"#1d4ed8"} ] } },
+  dolce:   { price: 10,  chipGroups: { tipo: ["Pandoro classico","Pandoro al cioccolato","Panettone"] },
+             swatchGroups: {} }
 };
 
 // ===== STATO =====
 const state = {
   birra:[], felpa:[], cappello:[], dolce:[],
-  draft:{ birra:{qty:0}, felpa:{qty:0}, cappello:{qty:0}, dolce:{qty:0} }
+  draft:{ birra:{formato:'Cassa da 6',qty:0}, felpa:{colore:'Nero',taglia:'S',qty:0}, cappello:{colore:'Nero',qty:0}, dolce:{tipo:'Pandoro classico',qty:0} }
 };
 
 // ===== UTILS =====
@@ -321,32 +331,170 @@ const total = ()=> ['birra','felpa','cappello','dolce'].reduce((s,k)=> s + qtyAl
 
 function refresh(){
   const t = total();
-  document.getElementById('totaleTop').textContent='Totale stimato: '+eur(t);
-  document.getElementById('totaleSide').textContent='Totale stimato: '+eur(t);
+  const t1=document.getElementById('totaleTop'); if(t1) t1.textContent='Totale stimato: '+eur(t);
+  const t2=document.getElementById('totaleSide'); if(t2) t2.textContent='Totale stimato: '+eur(t);
+  const setLine=(id,kind)=>{
+    const q = qtyAll(kind);
+    const varianti = state[kind].length + ((parseFloat(state.draft[kind]?.qty)||0) > 0 ? 1 : 0);
+    const el=document.getElementById(id); if(el) el.textContent = `${q} pz / ${varianti} varianti`;
+  };
+  setLine('sum-birra','birra'); setLine('sum-felpa','felpa'); setLine('sum-cappello','cappello'); setLine('sum-dolce','dolce');
 }
 
-function setup(){
-  // logo e anno
-  document.getElementById('logoTop').src = LOGO_URL;
-  document.getElementById('logoFooter').src = LOGO_URL;
-  document.getElementById('yearNow').textContent = new Date().getFullYear();
-
-  // immagini principali
-  document.getElementById('heroBgSafe').style.backgroundImage = `url('${IMAGES.hero}')`;
-  document.getElementById('causaBanner').style.backgroundImage = `url('${IMAGES.causa}')`;
-
-  // immagini prodotti
-  document.getElementById('img-birra').src   = IMAGES.birra;
-  document.getElementById('img-felpa').src   = IMAGES.felpa;
-  document.getElementById('img-cappello').src= IMAGES.cappello;
-  document.getElementById('img-dolce').src   = IMAGES.dolce;
-
-  refresh();
+function renderList(root, kind){
+  const box = root.querySelector('[data-list]');
+  const items = state[kind];
+  box.innerHTML = items.map((it,idx)=>{
+    const label = kind==='birra' ? `${it.qty} × ${it.formato}`
+      : kind==='felpa' ? `${it.qty} × Felpa, ${it.colore} ${it.taglia}`
+      : kind==='cappello' ? `${it.qty} × Cappello, ${it.colore}`
+      : `${it.qty} × ${it.tipo}`;
+    return `<div class="flex items-center justify-between rounded-xl border border-slate-200 px-3 py-2" data-idx="${idx}">
+      <span class="text-sm">${label}</span>
+      <span class="inline-flex items-center gap-2">
+        <button type="button" class="step" data-row-step="-1">–</button>
+        <button type="button" class="step" data-row-step="1">+</button>
+        <button type="button" class="px-2 py-1 rounded-lg border border-slate-200" data-row-remove>Rimuovi</button>
+      </span>
+    </div>`;
+  }).join('');
 }
 
-// avvio DOM pronto
-if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', setup); else setup();
+function bindCard(kind){
+  const root = document.getElementById(`card-${kind}`);
+  const d = state.draft[kind];
+  // chips
+  root.querySelectorAll('[data-chip-group]').forEach(group=>{
+    group.addEventListener('click', (e)=>{
+      const btn = e.target.closest('.chip'); if(!btn) return;
+      group.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false'));
+      btn.setAttribute('aria-pressed','true');
+      d[group.getAttribute('data-chip-group')] = btn.getAttribute('data-value');
+      refresh();
+    });
+  });
+  // swatches
+  root.querySelectorAll('[data-swatch-group]').forEach(group=>{
+    group.addEventListener('click', (e)=>{
+      const sw = e.target.closest('.swatch'); if(!sw) return;
+      group.querySelectorAll('.swatch').forEach(s=>s.setAttribute('aria-selected','false'));
+      sw.setAttribute('aria-selected','true');
+      d[group.getAttribute('data-swatch-group')] = sw.getAttribute('data-value');
+      refresh();
+    });
+  });
+  // draft stepper
+  root.querySelectorAll('[data-draft-stepper]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const delta = parseInt(btn.getAttribute('data-delta'),10);
+      d.qty = Math.max(0,(parseFloat(d.qty)||0)+delta);
+      const qEl = root.querySelector('[data-draft-qty]'); if(qEl) qEl.textContent = d.qty;
+      refresh();
+    });
+  });
+  // add variant
+  const addBtn = root.querySelector('[data-add-variant]');
+  if(addBtn){
+    addBtn.addEventListener('click', ()=>{
+      if(!d.qty || d.qty<=0){ refresh(); return; }
+      const list = state[kind];
+      const same = list.find(it=> Object.keys(d).every(k=> k==='qty' ? true : it[k]===d[k]));
+      if(same) same.qty += d.qty; else list.push({...d});
+      d.qty = 0; const qEl = root.querySelector('[data-draft-qty]'); if(qEl) qEl.textContent = '0';
+      renderList(root, kind); refresh();
+    });
+  }
+  // list handlers
+  const listEl = root.querySelector('[data-list]');
+  if(listEl){
+    listEl.addEventListener('click', (e)=>{
+      const line = e.target.closest('[data-idx]'); if(!line) return;
+      const idx = +line.getAttribute('data-idx');
+      if(e.target.closest('[data-row-step]')){
+        const delta = +e.target.closest('[data-row-step]').getAttribute('data-row-step');
+        state[kind][idx].qty = Math.max(0,(parseFloat(state[kind][idx].qty)||0)+delta);
+        if(state[kind][idx].qty===0) state[kind].splice(idx,1);
+        renderList(root, kind); refresh();
+      }
+      if(e.target.closest('[data-row-remove]')){
+        state[kind].splice(idx,1); renderList(root, kind); refresh();
+      }
+    });
+  }
+}
+
+// ===== Inizializzazione (senza setup) =====
+// 1) bind & render liste prodotti
+['birra','felpa','cappello','dolce'].forEach(k=>{ bindCard(k); renderList(document.getElementById(`card-${k}`),k); });
+
+// 2) select seminaristi + campo "Altro"
+(function(){
+  const sel = document.getElementById('seminarista');
+  if(sel){
+    SEMINARISTI.forEach(n=>{ const o=document.createElement('option'); o.value=n; o.textContent=n; sel.appendChild(o); });
+    sel.addEventListener('change', ()=>{
+      const wrap = document.getElementById('seminaristaAltroWrap');
+      if(wrap) wrap.classList.toggle('hidden', !sel.value.toLowerCase().includes('altro'));
+    });
+  }
+})();
+
+// 3) anno corrente nel footer
+(function(){ const y = document.getElementById('yearNow'); if(y) y.textContent = new Date().getFullYear(); })();
+
+// 4) totale iniziale
+refresh();
+
+// ===== INVIO =====
+const submitBtn = document.getElementById('submitBtn');
+if(submitBtn){
+  submitBtn.addEventListener('click', async ()=>{
+    const nome = document.getElementById('nome').value.trim();
+    const cognome = document.getElementById('cognome').value.trim();
+    const cell = document.getElementById('cellulare').value.trim();
+    const semSel = document.getElementById('seminarista').value;
+    const semAltro = document.getElementById('seminarista_altro').value.trim();
+    const seminarista = (!semSel || semSel==='— Seleziona —' || semSel.toLowerCase().includes('altro')) ? semAltro : semSel;
+    const pezzi = qtyAll('birra')+qtyAll('felpa')+qtyAll('cappello')+qtyAll('dolce');
+    const result = document.getElementById('result');
+    const status = document.getElementById('status');
+    const err = !nome||!cognome ? 'Compila Nome e Cognome.' : !/^[+]?\d{7,15}$/.test(cell.replace(/\s+/g,'')) ? 'Inserisci un numero valido (7–15 cifre).' : !seminarista ? 'Seleziona/inserisci un seminarista.' : pezzi===0 ? 'Indica almeno un prodotto (quantità > 0).' : !document.getElementById('consenso').checked ? 'Devi acconsentire al trattamento dati (GDPR).' : null;
+    if(err){ status.textContent='errore'; result.textContent=err; return; }
+
+    if(!ENDPOINT || /YOUR_APPS_SCRIPT/i.test(ENDPOINT)){
+      status.textContent='errore';
+      result.textContent="Configurazione mancante: incolla l'URL /exec della Web App di Apps Script in ENDPOINT.";
+      return;
+    }
+
+    status.textContent='invio…'; result.textContent='Invio in corso…';
+    const payload = {
+      timestamp:new Date().toISOString(), nome,cognome,cellulare:cell, seminarista,
+      birra_items: state.birra, felpa_items: state.felpa, cappello_items: state.cappello, dolce_items: state.dolce,
+      totale_stimato: total()
+    };
+    try{
+      const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const data = await res.json();
+      if(data.status==='ok'){
+        status.textContent='inviato'; result.textContent='Grazie! Preordine registrato.';
+        ['birra','felpa','cappello','dolce'].forEach(k=>{ state[k]=[]; state.draft[k].qty=0; renderList(document.getElementById(`card-${k}`),k); const el=document.querySelector(`#card-${k} [data-draft-qty]`); if(el) el.textContent='0'; });
+        refresh();
+      } else { throw new Error(data.message||'Errore generico'); }
+    }catch(e){
+      status.textContent='errore';
+      result.textContent='Invio fallito. ' + (e?.message||'Errore di rete/CORS');
+    }
+  });
+}
+
+// DEBUG globale
+window.addEventListener('error', (e)=>{
+  const bar=document.getElementById('jsError');
+  const msg=document.getElementById('jsErrorMsg');
+  if(bar&&msg){ bar.style.display='block'; msg.textContent=(e?.message||'Errore sconosciuto'); }
+});
 </script>
-
 </body>
 </html>
