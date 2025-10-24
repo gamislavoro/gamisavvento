@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Preordini – Seminario • Avvento & Natale</title>
+  <title>GAMis Avvento 2025</title>
   <meta name="theme-color" content="#b91c1c"/>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
@@ -277,16 +277,16 @@
 
 <script>
 // ===== CONFIG =====
-const ENDPOINT = "YOUR_APPS_SCRIPT_WEB_APP_URL";
+const ENDPOINT = "https://script.google.com/a/macros/seminario.milano.it/s/AKfycbyLq5FvkCvL50Eqc0ndTtHUSQuOKnOsKQK9wW5JgsnbzLQomnO4U6FpAUiUcWa-r2QNqw/exec";
 const IMAGES = {
-  hero:   "https://images.unsplash.com/photo-1609971140007-3a0a0062b03a?q=80&w=1600&auto=format&fit=crop",
-  birra:  "https://images.unsplash.com/photo-1541557435984-1c79685a0828?q=80&w=1200&auto=format&fit=crop",
-  felpa:  "https://images.unsplash.com/photo-1520975922284-85d8adf4c9a6?q=80&w=1200&auto=format&fit=crop",
-  cappello:"https://images.unsplash.com/photo-1523381002808-03dfa4ed1064?q=80&w=1200&auto=format&fit=crop",
-  dolce:  "https://images.unsplash.com/photo-1543339308-43f2d6d3f0d1?q=80&w=1200&auto=format&fit=crop",
-  causa:  "https://images.unsplash.com/photo-1542816417-09867c41f1f1?q=80&w=1600&auto=format&fit=crop"
+  hero:   "https://drive.google.com/uc?export=download&id=1lL7dRa_uSwmAc7o5hYvaqf1KOKsTF_d0",
+  birra:  "https://drive.google.com/uc?export=download&id=1FyGbFcAKVeRMFrWfRJlCjZTrGoa0_6uJ",
+  felpa:  "https://drive.google.com/uc?export=download&id=1xyUycIlwbBaenvG434ro1xIUMUmSItuA",
+  cappello:"https://drive.google.com/uc?export=download&id=17c5wnN1BTwQN8f1TWJ1Iu8FvLsPxH1au",
+  dolce:  "https://drive.google.com/uc?export=download&id=1mDIfJtxYIvUSRY6KOQXPoLQS0EG5b57x",
+  causa:  "https://drive.google.com/uc?export=download&id=1kfT2Orbb3SpEoVXxKBYfTPG0xEsOfpfn"
 };
-const SEMINARISTI = ["— Seleziona —","Don Andrea","Fr. Luca","Sem. Marco","Sem. Chiara","Altro…"];
+const SEMINARISTI = ["— Seleziona —","Abbate don Nikolas", "Angelini don Andrea", "Bassi Andrea", "Bergamini don Gioele", "Bianchi don Giuseppe", "Bisi Federico", "Bolaños Josè", "Brancè don Samuele", "Caholo Gilberto", "Capizzi Emanuele", "Carchedi Davide", "Cardani Lorenzo", "Combi Fabio", "Conti Giacomo", "Corti Giovanni", "Crivellari Matteo", "Erroi Filippo", "Federico Bisi", "Ferrera Pietro", "Frattolillo don Nicolò", "Freddi Giacomo", "Garzone Alessandro", "Gazzoli Daniele", "Giovenzana Francesco", "Girelli Simone", "Gorno Riccardo", "Guido don Emanuele", "Landini Marco", "Lattuada Stefano", "Maccà don Paolo", "Macchi don Paolo", "Magistrelli don Stefano", "Marchiori Manuel", "Mariani Massimiliano", "Martinelli Samuele", "Mbala Simon", "Meda Francesco", "Mesiano Lorenzo", "Molteni don Lorenzo", "Nossa Alessandro", "Orfano Michele", "Pagani Carlo", "Palazzo Andrea", "Pandolfi Andrea", "Parini Giovanni", "Pasquot Filippo", "Perego Gianluca", "Rossi Alessandro", "Santambrogio Tommaso", "Sinigaglia Francesco", "Swich don Andrea", "Tamburrino Stefano", "Tchingui Moises", "Valli Giovanni", "Vicini Alessio", "Zannini Alessandro", "Zappaterra Matteo", "Altro…"];
 $1
 
 // ---- Fallback & loader immagini robusto ----
@@ -325,8 +325,8 @@ function setBgImage(id, urls){
 
 // Opzioni centralizzate (non sovrascrive l'HTML esistente: popola solo gruppi vuoti)
 const OPTIONS = {
-  birra: { price: 4.5, chipGroups: { formato: ["Cassa da 6"] }, swatchGroups: {} },
-  felpa: { price: 28, chipGroups: { taglia: ["S","M","L","XL","XXL"] }, swatchGroups: { colore: [
+  birra: { price: 10, chipGroups: { formato: ["Cassa da 6"] }, swatchGroups: {} },
+  felpa: { price: 25, chipGroups: { taglia: ["S","M","L","XL","XXL"] }, swatchGroups: { colore: [
       {label:"Nero", hex:"#111827"},
       {label:"Grigio", hex:"#cbd5e1"},
       {label:"Bordeaux", hex:"#7f1d1d"},
@@ -340,7 +340,7 @@ const OPTIONS = {
       {label:"Verde", hex:"#16a34a"},
       {label:"Blu",   hex:"#1d4ed8"}
     ] } },
-  dolce: { price: 18, chipGroups: { tipo: ["Pandoro classico","Pandoro al cioccolato","Panettone"] }, swatchGroups: {} }
+  dolce: { price: 10, chipGroups: { tipo: ["Pandoro Classico","Pandoro Cioccolato","Pandoro Frutti di Bosco","Panettone"] }, swatchGroups: {} }
 };
 
 // ===== STATO =====
@@ -475,7 +475,7 @@ function bindCard(kind){
 
 function setup(){
   // logo & footer
-const logoTop = document.getElementById('logoTop'); if(logoTop){ logoTop.setAttribute('crossorigin','anonymous'); setImgSrc('logoTop', [LOGO_URL, 'img/logo.png']); }
+const logoTop = document.getElementById('logoTop'); if(logoTop){ logoTop.setAttribute('crossorigin','anonymous'); setImgSrc('logoTop', [LOGO_URL, 'https://drive.google.com/uc?export=download&id=1vf2wjXNXZMKcTNFs4cJfU2sANzbzbABL']); }
 const logoFooter = document.getElementById('logoFooter'); if(logoFooter){ logoFooter.setAttribute('crossorigin','anonymous'); setImgSrc('logoFooter', [LOGO_URL, 'img/logo.png']); }
 const y = document.getElementById('yearNow'); if(y) y.textContent = new Date().getFullYear();
   // immagini (con fallback a cartella locale img/)
