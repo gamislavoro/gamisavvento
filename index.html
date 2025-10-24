@@ -509,7 +509,7 @@ if(submitBtn){
       totale_stimato: total()
     };
     try{
-      const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
       if(!res.ok) throw new Error('HTTP '+res.status);
       const data = await res.json();
       if(data.status==='ok'){
