@@ -320,35 +320,6 @@ const state = {
   draft:{ birra:{formato:'Cassa da 6',qty:0}, felpa:{colore:'Nero',taglia:'S',qty:0}, cappello:{colore:'Nero',qty:0}, dolce:{tipo:'Pandoro classico',qty:0} }
 };
 
-// ===== IMG loader con fallback =====
-const IMG_FALLBACK = 'data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22750%22 height=%22450%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23e2e8f0%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2220%22 fill=%22%236b7280%22>immagine non disponibile</text></svg>';
-function setImgSrc(id, urls){
-  const el = document.getElementById(id);
-  if(!el) return;
-  const list = Array.isArray(urls) ? urls.filter(Boolean) : [urls].filter(Boolean);
-  let i = 0;
-  const tryNext = ()=>{
-    if(i >= list.length){ el.src = IMG_FALLBACK; return; }
-    el.onerror = ()=>{ i++; tryNext(); };
-    el.src = list[i];
-  };
-  tryNext();
-}
-function setBgImage(id, urls){
-  const el = document.getElementById(id);
-  if(!el) return;
-  const list = Array.isArray(urls) ? urls.filter(Boolean) : [urls].filter(Boolean);
-  let i = 0;
-  const tryNext = ()=>{
-    if(i >= list.length){ el.style.backgroundImage = `url(${IMG_FALLBACK})`; return; }
-    const test = new Image();
-    test.onload = ()=>{ el.style.backgroundImage = `url(${list[i]})`; };
-    test.onerror = ()=>{ i++; tryNext(); };
-    test.src = list[i];
-  };
-  tryNext();
-}
-
 // ===== UTILS =====
 const eur = (n)=> (Number.isFinite(n)?n:0).toLocaleString('it-IT',{style:'currency',currency:'EUR'});
 const qtySum = (arr)=> Array.isArray(arr)? arr.reduce((a,i)=> a + (parseFloat(i.qty)||0), 0) : 0;
@@ -446,22 +417,6 @@ function bindCard(kind){
 }
 
 function setup(){
-  // logo & footer
-  setImgSrc('logoTop',   [LOGO_URL, 'img/logo.png']);
-  setImgSrc('logoFooter',[LOGO_URL, 'img/logo.png']);
-  const y = document.getElementById('yearNow'); if(y) y.textContent = new Date().getFullYear();
-
-  // HERO SAFE MODE bg
-  setBgImage('heroBgSafe', [IMAGES.hero, 'img/hero.jpg']);
-
-  // CAUSA banner bg
-  setBgImage('causaBanner', [IMAGES.causa, 'img/causa.jpg']);
-
-  // immagini card
-  setImgSrc('img-birra',   [IMAGES.birra,   'img/birra.jpg']);
-  setImgSrc('img-felpa',   [IMAGES.felpa,   'img/felpa.jpg']);
-  setImgSrc('img-cappello',[IMAGES.cappello,'img/cappello.jpg']);
-  setImgSrc('img-dolce',   [IMAGES.dolce,   'img/dolci.jpg']);
 
   // bind per card
   ['birra','felpa','cappello','dolce'].forEach(k=>{
