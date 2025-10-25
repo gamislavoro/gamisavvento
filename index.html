@@ -481,19 +481,74 @@ if(submitBtn){
       return;
     }
 
-    status.textContent='invio…'; result.textContent='Invio in corso…';
-    const payload = {
-      timestamp: new Date().toISOString(),
-      nome,
-      cognome,
-      cellulare: cell,
-      seminarista,
-      birra_items: state.birra.map(b => `${b.formato} ${b.qty}`),
-      felpa_items: state.felpa.map(f => `${f.modello} ${f.stampa} ${f.qty}`),
-      cappello_items: state.cappello.map(c => `${c.colore} ${c.qty}`),
-      dolce_items: state.dolce.map(d => `${d.tipo} ${d.qty}`),
-      totale_stimato: total()
-    };
+    status.textContent = 'invio…';
+result.textContent = 'Invio in corso…';
+
+// Costruisco le RIGHE pronte (una variante = una riga)
+const ts   = new Date().toISOString();
+const base = [ts, nome, cognome, cell, seminarista];
+const tot  = total();
+
+const rows = [];
+
+// Birra
+state.birra.forEach(b => {
+  const qty = Number(b.qty) || 0;
+  if (!qty) return;
+  rows.push([...base, 'Birra', '', '', '', qty, tot]);
+});
+
+// Felpa (usa SOLO modello/stampa/taglia)
+state.felpa.forEach(f => {
+  const qty = Number(f.qty) || 0;
+  if (!qty) return;
+  rows.push([...base, 'Felpa', f.modello || '', f.stampa || '', f.taglia || '', qty, tot]);
+});
+
+// Cappello
+state.cappello.forEach(c => {
+  const qty = Number(c.qty) || 0;
+  if (!qty) return;
+  rows.push([...base, 'Cappello', '', c.colore || '', '', qty, tot]);
+});
+
+// Dolce
+state.dolce.forEach(d => {
+  const qty = Number(d.qty) || 0;
+  if (!qty) return;
+  rows.push([...base, 'Dolce', '', d.tipo || '', '', qty, tot]);
+});
+
+// Payload minimal: solo righe
+const payload = { rows };
+
+try {
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json();
+  if (data.status === 'ok') {
+    status.textContent = 'inviato';
+    result.textContent = 'Grazie! Preordine registrato.';
+    ['birra','felpa','cappello','dolce'].forEach(k=>{
+      state[k]=[];
+      state.draft[k].qty=0;
+      renderList(document.getElementById(`card-${k}`),k);
+      const el=document.querySelector(`#card-${k} [data-draft-qty]`);
+      if(el) el.textContent='0';
+    });
+    refresh();
+  } else {
+    throw new Error(data.message || 'Errore generico');
+  }
+} catch (e) {
+  status.textContent = 'errore';
+  result.textContent = 'Invio fallito. ' + (e?.message || 'Errore di rete/CORS');
+}
+
 
     try{
       const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
