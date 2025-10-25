@@ -31,7 +31,7 @@
   <header class="bg-white/90 backdrop-blur sticky top-0 z-40 border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 md:px-6 h-18 md:h-24 flex items-center justify-center">
       <!-- Inserisci QUI l'URL del logo (può essere assoluto o relativo) -->
-      <img id="logoTop" alt="Logo Seminario" class="h-12 md:h-16 w-auto"" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/refs/heads/main/logo.png"/>
+      <img id="logoTop" alt="Logo Seminario" class="h-12 md:h-16 w-auto cursor-pointer"" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/refs/heads/main/logo.png"/>
     </div>
     <div class="bg-white/90 backdrop-blur sticky top-0 z-40 border-b border-slate-200 transition-transform duration-300 will-change-transform">
     </div>
@@ -135,8 +135,8 @@
               </div>
             </div>
             <div>
-              <div class="text-xs text-slate-500 mb-2">Colore</div>
-              <div class="flex items-center gap-2" data-swatch-group="colore">
+              <div class="text-xs text-slate-500 mb-2">Stampa</div>
+              <div class="flex items-center gap-2" data-swatch-group="stampa">
                 <button type="button" class="swatch" style="background:#111827" data-value="Nero" aria-selected="true" title="Nero"></button>
                 <button type="button" class="swatch" style="background:#cbd5e1" data-value="Grigio" aria-selected="false" title="Grigio"></button>
                 <button type="button" class="swatch" style="background:#7f1d1d" data-value="Bordeaux" aria-selected="false" title="Bordeaux"></button>
@@ -330,13 +330,11 @@ const SEMINARISTI = ["— Seleziona —","Abbate don Nikolas", "Angelini don And
 const OPTIONS = {
   birra:   { price: 10, chipGroups: { formato: ["Cassa da 6"] }, swatchGroups: {} },
   felpa:   { price: 25,  chipGroups: { taglia: ["S","M","L","XL","XXL"] },
-             swatchGroups: { colore: [
-               {label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
+             swatchGroups: { modello: [{label:"Bianco",hex:"#ffffff"},
+               {label:"Nero",  hex:"#111827"}],
+               stampa: [{label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
                {label:"Bordeaux",hex:"#7f1d1d"},{label:"Verde bosco",hex:"#14532d"},
-               {label:"Blu navy",hex:"#1e3a8a"} ],
-                           tessuto: [
-               {label:"Bianco",hex:"#ffffff"},
-               {label:"Nero",  hex:"#111827"}] } },  
+               {label:"Blu navy",hex:"#1e3a8a"} ] } },  
   cappello:{ price: 12,  chipGroups: {}, swatchGroups: { colore: [
                {label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
                {label:"Rosso",hex:"#ef4444"},{label:"Verde",hex:"#16a34a"},
@@ -557,6 +555,10 @@ document.querySelectorAll('img[data-zoomable]').forEach(img => {
     lightboxImg.src = img.src;
     lightbox.classList.remove('hidden');
   });
+});
+
+  document.getElementById('logoTop').addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
   
