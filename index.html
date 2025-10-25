@@ -384,7 +384,7 @@ function renderList(root, kind){
   const items = state[kind];
   box.innerHTML = items.map((it,idx)=>{
     const label = kind==='birra' ? `${it.qty} × ${it.formato}`
-      : kind==='felpa' ? `${it.qty} × Felpa, ${it.colore} ${it.taglia}`
+      : kind==='felpa' ? `${it.qty} × Felpa, modello ${it.modello} stampa ${it.stampa} ${it.taglia}`
       : kind==='cappello' ? `${it.qty} × Cappello, ${it.colore}`
       : `${it.qty} × ${it.tipo}`;
     return `<div class="flex items-center justify-between rounded-xl border border-slate-200 px-3 py-2" data-idx="${idx}">
