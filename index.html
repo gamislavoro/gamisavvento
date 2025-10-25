@@ -480,43 +480,46 @@ if(submitBtn){
       return;
     }
 
-    status.textContent = 'invio…';
-    result.textContent = 'Invio in corso…';
+   status.textContent = 'invio…';
+result.textContent = 'Invio in corso…';
 
-    // Costruisco le RIGHE pronte (una variante = una riga)
-    const ts   = new Date().toISOString();
-    const base = [ts, nome, cognome, cell, seminarista];
-    const tot  = total();
+// Costruisco le RIGHE pronte (UNA VARIANTE = UNA RIGA)
+const ts   = new Date().toISOString();
+const base = [ts, nome, cognome, cell, seminarista];
+const tot  = total();
 
-    const rows = [];
-    state.birra.forEach(b => { const q=+b.qty||0; if(q) rows.push([...base,'Birra','',          '',            '',      q, tot]); });
-    state.felpa.forEach(f => { const q=+f.qty||0; if(q) rows.push([...base,'Felpa',f.modello||'',f.stampa||'', f.taglia||'', q, tot]); });
-    state.cappello.forEach(c=> { const q=+c.qty||0; if(q) rows.push([...base,'Cappello','',       c.colore||'',  '',      q, tot]); });
-    state.dolce.forEach(d   => { const q=+d.qty||0; if(q) rows.push([...base,'Dolce','',          d.tipo||'',    '',      q, tot]); });
+const rows = [];
+state.birra.forEach(b   => { const q=+b.qty||0; if(q) rows.push([...base,'Birra','',          '',            '',      q, tot]); });
+state.felpa.forEach(f   => { const q=+f.qty||0; if(q) rows.push([...base,'Felpa',f.modello||'',f.stampa||'', f.taglia||'', q, tot]); });
+state.cappello.forEach(c=> { const q=+c.qty||0; if(q) rows.push([...base,'Cappello','',       c.colore||'',  '',      q, tot]); });
+state.dolce.forEach(d   => { const q=+d.qty||0; if(q) rows.push([...base,'Dolce','',          d.tipo||'',    '',      q, tot]); });
 
-    const payload = { rows };
+// Invia SOLO { rows }
+const payload = { rows };
 
-    try {
-      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      const data = await res.json();
-      if (data.status === 'ok') {
-        status.textContent = 'inviato';
-        result.textContent = 'Grazie! Preordine registrato.';
-        ['birra','felpa','cappello','dolce'].forEach(k=>{
-          state[k]=[]; state.draft[k].qty=0;
-          renderList(document.getElementById(`card-${k}`),k);
-          const el=document.querySelector(`#card-${k} [data-draft-qty]`); if(el) el.textContent='0';
-        });
-        refresh();
-      } else {
-        throw new Error(data.message || 'Errore generico');
-      }
-    } catch (e) {
-      status.textContent = 'errore';
-      result.textContent = 'Invio fallito. ' + (e?.message || 'Errore di rete/CORS');
-    }
+try {
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
   });
+  const data = await res.json();
+
+  if (data.status === 'ok') {
+    status.textContent = 'inviato';
+    result.textContent = 'Grazie! Preordine registrato.';
+    ['birra','felpa','cappello','dolce'].forEach(k=>{
+      state[k]=[]; state.draft[k].qty=0;
+      renderList(document.getElementById(`card-${k}`),k);
+      const el=document.querySelector(`#card-${k} [data-draft-qty]`); if(el) el.textContent='0';
+    });
+    refresh();
+  } else {
+    throw new Error(data.message || 'Errore generico');
+  }
+} catch (e) {
+  status.textContent = 'errore';
+  result.textContent = 'Invio fallito. ' + (e?.message || 'Errore di rete/CORS');
 }
 
 // Header auto-hide
