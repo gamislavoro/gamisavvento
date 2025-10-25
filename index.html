@@ -437,7 +437,16 @@ function bindCard(kind){
       if(!d.qty || d.qty<=0){ refresh(); return; }
       const list = state[kind];
       const same = list.find(it=> Object.keys(d).every(k=> k==='qty' ? true : it[k]===d[k]));
-      if(same) same.qty += d.qty; else list.push({...d});
+      if (same) { same.qty += d.qty;} else {if (kind === 'felpa') 
+        {list.push({
+          modello: d.modello,
+          stampa:  d.stampa,
+          taglia:  d.taglia,
+          qty:     Number(d.qty) || 0
+        });
+      } else {list.push({...d});}
+      }
+
       d.qty = 0; const qEl = root.querySelector('[data-draft-qty]'); if(qEl) qEl.textContent = '0';
       renderList(root, kind); refresh();
     });
@@ -508,7 +517,14 @@ if(submitBtn){
     status.textContent='invio…'; result.textContent='Invio in corso…';
     const payload = {
       timestamp:new Date().toISOString(), nome,cognome,cellulare:cell, seminarista,
-      birra_items: state.birra, felpa_items: state.felpa, cappello_items: state.cappello, dolce_items: state.dolce,
+      birra_items: state.birra, 
+      felpa_items: state.felpa.map(it => ({
+        modello: it.modello,
+        stampa:  it.stampa,
+        taglia:  it.taglia,
+        qty:     Number(it.qty) || 0
+      })),
+      , cappello_items: state.cappello, dolce_items: state.dolce,
       totale_stimato: total()
     };
     try{
