@@ -483,13 +483,18 @@ if(submitBtn){
 
     status.textContent='invio…'; result.textContent='Invio in corso…';
     const payload = {
-      timestamp:new Date().toISOString(), nome,cognome,cellulare:cell, seminarista,
-      birra_items: state.birra,
-      felpa_items: state.felpa,             // 👈 ora contiene già solo {modello,stampa,taglia,qty}
-      cappello_items: state.cappello,
-      dolce_items: state.dolce,
+      timestamp: new Date().toISOString(),
+      nome,
+      cognome,
+      cellulare: cell,
+      seminarista,
+      birra_items: state.birra.map(b => `${b.formato} ${b.qty}`),
+      felpa_items: state.felpa.map(f => `${f.modello} ${f.stampa} ${f.qty}`),
+      cappello_items: state.cappello.map(c => `${c.colore} ${c.qty}`),
+      dolce_items: state.dolce.map(d => `${d.tipo} ${d.qty}`),
       totale_stimato: total()
     };
+
     try{
       const res = await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload)});
       if(!res.ok) throw new Error('HTTP '+res.status);
