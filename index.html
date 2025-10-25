@@ -33,7 +33,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-  <!-- HEADER con logo centrato (riga spostata/risolta) -->
+  <!-- HEADER -->
   <header class="bg-white/95 sticky top-0 z-40 backdrop-blur transition-transform duration-400 will-change-transform transform-gpu">
     <div class="max-w-6xl mx-auto px-4 md:px-6 flex items-center justify-center py-3 md:py-4 relative">
       <img id="logoTop" alt="Logo Seminario" class="h-14 md:h-16 w-auto cursor-pointer" src="https://raw.githubusercontent.com/gamislavoro/gamisavvento/refs/heads/main/logo.png"/>
@@ -227,23 +227,23 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
               <label class="text-xs text-slate-600">Nome</label>
-              <input id="nome" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Es. Maria"/>
+              <input id="nome" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3" placeholder="Es. Maria"/>
             </div>
             <div>
               <label class="text-xs text-slate-600">Cognome</label>
-              <input id="cognome" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Es. Rossi"/>
+              <input id="cognome" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3" placeholder="Es. Rossi"/>
             </div>
             <div class="md:col-span-2">
               <label class="text-xs text-slate-600">Cellulare</label>
-              <input id="cellulare" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Es. 3331234567"/>
+              <input id="cellulare" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3" placeholder="Es. 3331234567"/>
             </div>
             <div class="md:col-span-2">
               <label class="text-xs text-slate-600">Seminarista di riferimento</label>
-              <select id="seminarista" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400"></select>
+              <select id="seminarista" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3"></select>
             </div>
             <div id="seminaristaAltroWrap" class="hidden md:col-span-2">
               <label class="text-xs text-slate-600">Altro seminarista</label>
-              <input id="seminarista_altro" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-400" placeholder="Nome e cognome"/>
+              <input id="seminarista_altro" class="mt-1 w-full rounded-xl border border-slate-200 px-3 py-3" placeholder="Nome e cognome"/>
             </div>
           </div>
           <div class="mt-4 flex items-start gap-3">
@@ -303,12 +303,13 @@
 
 <script>
 // ===== CONFIG =====
+// Sostituisci con l'URL /exec della tua Web App Apps Script
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbyLq5FvkCvL50Eqc0ndTtHUSQuOKnOsKQK9wW5JgsnbzLQomnO4U6FpAUiUcWa-r2QNqw/exec";
 
 // SEMINARISTI
 const SEMINARISTI = ["— Seleziona —","Abbate don Nikolas","Angelini don Andrea","Bassi Andrea","Bergamini don Gioele","Bianchi don Giuseppe","Bisi Federico","Bolaños Josè","Brancè don Samuele","Caholo Gilberto","Capizzi Emanuele","Carchedi Davide","Cardani Lorenzo","Combi Fabio","Conti Giacomo","Corti Giovanni","Crivellari Matteo","Erroi Filippo","Federico Bisi","Ferrera Pietro","Frattolillo don Nicolò","Freddi Giacomo","Garzone Alessandro","Gazzoli Daniele","Giovenzana Francesco","Girelli Simone","Gorno Riccardo","Guido don Emanuele","Landini Marco","Lattuada Stefano","Maccà don Paolo","Macchi don Paolo","Magistrelli don Stefano","Marchiori Manuel","Mariani Massimiliano","Martinelli Samuele","Mbala Simon","Meda Francesco","Mesiano Lorenzo","Molteni don Lorenzo","Nossa Alessandro","Orfano Michele","Pagani Carlo","Palazzo Andrea","Pandolfi Andrea","Parini Giovanni","Pasquot Filippo","Perego Gianluca","Rossi Alessandro","Santambrogio Tommaso","Sinigaglia Francesco","Swich don Andrea","Tamburrino Stefano","Tchingui Moises","Valli Giovanni","Vicini Alessio","Zannini Alessandro","Zappaterra Matteo","Altro…"];
 
-// PRODOTTI
+// PRODOTTI (prezzi solo per il totale stimato)
 const OPTIONS = {
   birra: { price: 10, chipGroups: { formato: ["Cassa da 6"] }, swatchGroups: {} },
   felpa: { price: 25, chipGroups: { taglia: ["S","M","L","XL","XXL"] },
@@ -325,7 +326,6 @@ const OPTIONS = {
 // ===== STATO =====
 const state = {
   birra:[], felpa:[], cappello:[], dolce:[],
-  // 🔁 KILL vecchi nomi: ora solo modello/stampa
   draft:{
     birra:{formato:'Cassa da 6', qty:0},
     felpa:{modello:'Bianco', stampa:'Nero', taglia:'S', qty:0},
@@ -443,7 +443,7 @@ function bindCard(kind){
   }
 }
 
-// ===== Inizializzazione =====
+// Inizializzazione
 ['birra','felpa','cappello','dolce'].forEach(k=>{ bindCard(k); renderList(document.getElementById(`card-${k}`),k); });
 
 (function(){
@@ -467,55 +467,58 @@ if(submitBtn){
     const cognome = document.getElementById('cognome').value.trim();
     const cell = document.getElementById('cellulare').value.trim();
     const semSel = document.getElementById('seminarista').value;
-    const semAltro = document.getElementById('seminarista_altro').value.trim();
+    const semAltro = document.getElementById('seminarista_altro')?.value?.trim() || "";
     const seminarista = (!semSel || semSel==='— Seleziona —' || semSel.toLowerCase().includes('altro')) ? semAltro : semSel;
     const pezzi = qtyAll('birra')+qtyAll('felpa')+qtyAll('cappello')+qtyAll('dolce');
     const result = document.getElementById('result');
     const status = document.getElementById('status');
-    const err = !nome||!cognome ? 'Compila Nome e Cognome.' : !/^[+]?\d{7,15}$/.test(cell.replace(/\s+/g,'')) ? 'Inserisci un numero valido (7–15 cifre).' : !seminarista ? 'Seleziona/inserisci un seminarista.' : pezzi===0 ? 'Indica almeno un prodotto (quantità > 0).' : !document.getElementById('consenso').checked ? 'Devi acconsentire al trattamento dati (GDPR).' : null;
+
+    const err = !nome||!cognome ? 'Compila Nome e Cognome.' 
+      : !/^[+]?\d{7,15}$/.test(cell.replace(/\s+/g,'')) ? 'Inserisci un numero valido (7–15 cifre).'
+      : !seminarista ? 'Seleziona/inserisci un seminarista.'
+      : pezzi===0 ? 'Indica almeno un prodotto (quantità > 0).'
+      : !document.getElementById('consenso').checked ? 'Devi acconsentire al trattamento dati (GDPR).'
+      : null;
     if(err){ status.textContent='errore'; result.textContent=err; return; }
 
-    if(!ENDPOINT || /YOUR_APPS_SCRIPT/i.test(ENDPOINT)){
+    if(!ENDPOINT || /PASTE-YOUR/i.test(ENDPOINT)){
       status.textContent='errore';
-      result.textContent="Configurazione mancante: incolla l'URL /exec della Web App di Apps Script in ENDPOINT.";
+      result.textContent="Config mancante: incolla l'URL /exec della tua Web App in ENDPOINT.";
       return;
     }
 
     status.textContent = 'invio…';
     result.textContent = 'Invio in corso…';
 
-    // === NUOVO FORMATO RIGHE ===
-    // Nuovo ordine colonne:
-    // Nome, Cognome, Cell, Seminarista, Prodotto, Modello, Colore, Quantità, Totale stimato
+    // === RIGHE NELL'ORDINE RICHIESTO ===
+    // Nome, Cognome, Cell, Seminarista, Prodotto, Modello, Colore, Taglia, Quantità, Totale stimato
     const tot = total();
-
     const rows = [];
 
     // Birra: Modello = Formato
     state.birra.forEach(b => {
       const qty = Number(b.qty) || 0; if (!qty) return;
-      rows.push([nome, cognome, cell, seminarista, 'Birra', b.formato || '', '', qty, tot]);
+      rows.push([nome, cognome, cell, seminarista, 'Birra', b.formato || '', '', '', qty, tot]);
     });
 
-    // Felpa: Modello = modello, Colore = stampa (taglia NON inviata)
+    // Felpa: Modello = modello, Colore = stampa, Taglia = taglia
     state.felpa.forEach(f => {
       const qty = Number(f.qty) || 0; if (!qty) return;
-      rows.push([nome, cognome, cell, seminarista, 'Felpa', f.modello || '', f.stampa || '', qty, tot]);
+      rows.push([nome, cognome, cell, seminarista, 'Felpa', f.modello || '', f.stampa || '', f.taglia || '', qty, tot]);
     });
 
     // Cappello: solo Colore
     state.cappello.forEach(c => {
       const qty = Number(c.qty) || 0; if (!qty) return;
-      rows.push([nome, cognome, cell, seminarista, 'Cappello', '', c.colore || '', qty, tot]);
+      rows.push([nome, cognome, cell, seminarista, 'Cappello', '', c.colore || '', '', qty, tot]);
     });
 
     // Dolce: Modello = Tipo
     state.dolce.forEach(d => {
       const qty = Number(d.qty) || 0; if (!qty) return;
-      rows.push([nome, cognome, cell, seminarista, 'Dolce', d.tipo || '', '', qty, tot]);
+      rows.push([nome, cognome, cell, seminarista, 'Dolce', d.tipo || '', '', '', qty, tot]);
     });
 
-    // Payload minimal: solo righe
     const payload = { rows };
 
     try {
@@ -529,6 +532,7 @@ if(submitBtn){
       if (data.status === 'ok') {
         status.textContent = 'inviato';
         result.textContent = 'Grazie! Preordine registrato.';
+        // reset
         ['birra','felpa','cappello','dolce'].forEach(k=>{
           state[k]=[];
           state.draft[k].qty=0;
