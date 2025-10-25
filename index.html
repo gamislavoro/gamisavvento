@@ -122,10 +122,16 @@
             </header>
             <p class="text-sm text-slate-600">Felpa comoda e calda, perfetta per l’inverno, disponibile in vari colori e taglie.</p>
             <div>
-              <div class="text-xs text-slate-500 mb-2">Tipo</div>
-              <div class="flex flex-wrap gap-2" data-chip-group="formato">
-                <button type="button" class="chip" aria-pressed="true" data-value="Cassa da 6">Nera</button>
-                <button type="button" class="chip" aria-pressed="true" data-value="Cassa da 6">Bianca</button>
+              <div class="text-xs text-slate-500 mb-2">Modello</div>
+              <div class="flex items-center gap-2" data-swatch-group="modello">
+              <!-- Bianco -->
+                <button type="button" class="swatch ring-1 ring-slate-300"
+                style="background:#ffffff"
+                data-value="Bianco" aria-selected="true" title="Bianco"></button>
+              <!-- Nero -->
+                <button type="button" class="swatch"
+                style="background:#111827"
+                data-value="Nero" aria-selected="false" title="Nero"></button>
               </div>
             </div>
             <div>
@@ -327,7 +333,10 @@ const OPTIONS = {
              swatchGroups: { colore: [
                {label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
                {label:"Bordeaux",hex:"#7f1d1d"},{label:"Verde bosco",hex:"#14532d"},
-               {label:"Blu navy",hex:"#1e3a8a"} ] } },
+               {label:"Blu navy",hex:"#1e3a8a"} ],
+                           tessuto: [
+               {label:"Bianco",hex:"#ffffff"},
+               {label:"Nero",  hex:"#111827"}] } },  
   cappello:{ price: 12,  chipGroups: {}, swatchGroups: { colore: [
                {label:"Nero",hex:"#111827"},{label:"Grigio",hex:"#cbd5e1"},
                {label:"Rosso",hex:"#ef4444"},{label:"Verde",hex:"#16a34a"},
@@ -339,7 +348,7 @@ const OPTIONS = {
 // ===== STATO =====
 const state = {
   birra:[], felpa:[], cappello:[], dolce:[],
-  draft:{ birra:{formato:'Cassa da 6',qty:0}, felpa:{colore:'Nero',taglia:'S',qty:0}, cappello:{colore:'Nero',qty:0}, dolce:{tipo:'Pandoro classico',qty:0} }
+  draft:{ birra:{formato:'Cassa da 6',qty:0}, felpa:{tessuto:'Bianco', colore:'Nero',taglia:'S',qty:0}, cappello:{colore:'Nero',qty:0}, dolce:{tipo:'Pandoro classico',qty:0} }
 };
 
 // ===== UTILS =====
