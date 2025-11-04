@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Humilitas – Preordini Beneficenza</title>
+  <style>
+    :root{ --bg:#ffffff; --text:#0b0b0b; --muted:#666; --accent:#000; --line:#e6e6e6; }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:1200px;margin:0 auto;padding:0 16px}
+
+    /* Header con logo immagine e margine mobile */
+    header.site{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:18px 0}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:0 16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.3px}
+    .brand .logo-img{width:34px;height:34px;border-radius:8px;object-fit:cover;box-shadow:0 6px 20px rgba(0,0,0,.08)}
+    .cause-ref{font-size:13px;color:#444;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:#fff}
+
+    @media (max-width:720px){
+      header.site{padding:22px 0}
+      .nav{padding:0 20px}
+      .brand .logo-img{width:38px;height:38px}
+    }
+
+    /* HERO */
+    .hero{position:relative;min-height:64vh;display:grid;align-items:end;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat}
+    .hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.6) 45%,#fff 85%)}
+    .hero-inner{position:relative;padding:60px 0;text-align:left}
+    h1{font-size:clamp(32px,5.5vw,56px);line-height:1.05;margin:0 0 10px 0}
+    p.lead{color:#444;max-width:760px}
+
+    /* Fascia marquee */
+    .band{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#f6f6f6}
+    .band .track{display:flex;gap:28px;white-space:nowrap;animation:scroll 28s linear infinite;padding:10px 0}
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    /* Sections */
+    section{padding:48px 0;border-top:1px solid var(--line)}
+    h2{font-size:clamp(22px,4vw,36px);margin:0 0 6px 0}
+    .overline{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#888}
+
+    /* Catalogo lookbook */
+    .look{display:grid;gap:14px;grid-template-columns:repeat(8,1fr)}
+    .tile{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;transition:transform .2s ease, box-shadow .2s ease}
+    .tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.06)}
+    .tile img{aspect-ratio:3/2;object-fit:cover;max-height:240px}
+    .tile .cap{position:absolute;inset:auto 10px 10px 10px;display:flex;justify-content:space-between;align-items:flex-end;color:#111}
+    .cap h3{margin:0;font-weight:900;background:#fff;padding:6px 10px;border-radius:10px;font-size:14px;max-width:75%}
+    .cap .price{background:#111;color:#fff;font-weight:800;padding:6px 10px;border-radius:999px;font-size:12px}
+    .span-5{grid-column:span 5}
+    .span-4{grid-column:span 4}
+    .span-3{grid-column:span 3}
+
+    /* Form */
+    .grid-2{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .form-grid{display:grid;gap:16px}
+    .field label{display:block;font-size:13px;color:#666;margin-bottom:6px}
+    .input,.select{width:100%;padding:12px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text);outline:none;appearance:none;-webkit-appearance:none;-moz-appearance:none;line-height:1.2}
+    .groupbox{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fff;margin-bottom:16px}
+    .group-grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
+    .remove{background:transparent;color:#861f2b;border:1px solid #f1c4cc;padding:10px 14px;border-radius:12px;cursor:pointer}
+    .add-btn{background:#000;color:#fff;border:1px solid #000;padding:10px 14px;border-radius:14px;cursor:pointer;margin-top:8px}
+
+    .summary{position:sticky;top:84px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 8px 24px rgba(0,0,0,.05)}
+    .summary .content{padding:18px}
+    .line{height:1px;background:var(--line);margin:8px 0}
+    .alert{border:1px solid #2b9c63;background:#e9f8f1;color:#145a32;padding:12px 14px;border-radius:12px;font-size:14px}
+    .alert.error{border-color:#d1525c;background:#ffeef0;color:#861f2b}
+
+    /* CAUSA: due colonne (immagine sinistra, testo destra su #111) */
+    .cause-band{position:relative;color:#fff;padding:0}
+    .cause-grid{display:grid;grid-template-columns:1fr 1fr;min-height:360px}
+    .cause-media{background:url('https://images.unsplash.com/photo-1544989164-31dc3c645987?q=80&w=2400&auto=format&fit=crop') center/cover no-repeat}
+    .cause-text{max-width:720px;margin:0;padding:48px 24px}
+
+    footer{border-top:1px solid var(--line);padding:34px 0;color:#222;font-size:14px}
+    .footer-brand{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;margin:0 auto}
+    .footer-logo{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:#000;color:#fff;font-weight:900}
+
+    /* Mobile tweaks */
+    @media (max-width:980px){
+      .look{grid-template-columns:repeat(2,1fr)}
+      .span-5,.span-4,.span-3{grid-column:span 2}
+      .grid-2{grid-template-columns:1fr}
+      .summary{position:static}
+      .hero-inner{text-align:center}
+      /* Causa: immagine sopra, testo sotto */
+      .cause-grid{grid-template-columns:1fr !important}
+      .cause-media{order:1; min-height:220px; height:220px}
+      .cause-pane{order:2}
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER: logo immagine + margine mobile -->
+  <header class="site">
+    <div class="container nav">
+      <a href="#home" class="brand">
+        <img src="img/logo.png" alt="Logo Humilitas" class="logo-img" />
+        <span>Humilitas</span>
+      </a>
+      <a class="cause-ref" href="#cause">Perché raccogliamo</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="container hero-inner">
+      <h1>Preordina, sostieni, <span style="background:linear-gradient(90deg,#000,#555);-webkit-background-clip:text;background-clip:text;color:transparent">fa' del bene</span></h1>
+      <p class="lead">Raccolta fondi del Seminario di Milano per progetti solidali in Terra Santa. Prodotti esclusivi, trasparenza totale.</p>
+    </div>
+  </section>
+
+  <!-- FASCIA PROMO -->
+  <div class="band" aria-hidden="true">
+    <div class="track">
+      <span>✨ <b>HUMILITAS</b> · PREORDINI APERTI · BIRRA · FELPE · CAPPELLI · COMBO · SOSTIENI LA TERRA SANTA ·</span>
+      <span>✨ <b>HUMILITAS</b> · PREORDINI APERTI · BIRRA · FELPE · CAPPELLI · COMBO · SOSTIENI LA TERRA SANTA ·</span>
+    </div>
+  </div>
+
+  <!-- CATALOGO -->
+  <section id="prodotti">
+    <div class="container">
+      <div class="overline">Catalogo</div>
+      <h2>Prodotti in preordine</h2>
+      <div class="look" style="margin-top:16px">
+        <article class="tile span-4"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop" alt="Felpa Humilitas" /><div class="cap"><h3>Felpa "Humilitas"</h3><span class="price">€20</span></div></article>
+        <article class="tile span-4"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Cappello" /><div class="cap"><h3>Cappello in lana</h3><span class="price">€5</span></div></article>
+        <article class="tile span-5"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1600&auto=format&fit=crop" alt="Combo felpa+cappello" /><div class="cap"><h3>Combo Felpa + Cappello</h3><span class="price">€25</span></div></article>
+        <article class="tile span-3"><img src="https://images.unsplash.com/photo-1532634896-26909d0d4b6a?q=80&w=1600&auto=format&fit=crop" alt="Birra artigianale" /><div class="cap"><h3>Birra (x3)</h3><span class="price">€15</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREORDINE (50/50) -->
+  <section id="preordina">
+    <div class="container">
+      <div class="overline">Prenota ora</div>
+      <h2>Compila il tuo preordine</h2>
+      <p style="color:#444">Nessun pagamento online: ti contatteremo per la consegna e il ritiro.</p>
+
+      <div class="grid-2" style="margin-top:16px;align-items:start">
+        <!-- FORM (sinistra) -->
+        <div>
+          <form id="order-form" class="form-grid">
+            <div class="grid-2">
+              <div class="field"><label>Nome</label><input required class="input" id="nome" placeholder="Mario" /></div>
+              <div class="field"><label>Cognome</label><input required class="input" id="cognome" placeholder="Rossi" /></div>
+              <div class="field"><label>Cellulare</label><input required class="input" id="cellulare" placeholder="333 1234567" /></div>
+              <div class="field">
+                <label>Seminarista di riferimento</label>
+                <input list="seminaristi" class="input" id="seminarista" placeholder="Cerca o scegli..." />
+                <datalist id="seminaristi"></datalist>
+                <div id="seminarista-altro-wrap" style="display:none;margin-top:8px"><input class="input" id="seminarista-altro" placeholder="Inserisci nome e cognome" /></div>
+              </div>
+            </div>
+
+            <!-- Birra: solo confezione da 3 (senza gusto) -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0"><b>🍺 Birra (confezione da 3)</b><span style="color:#666">€15</span></div>
+              <div id="beer-list" class="form-grid"></div>
+              <button type="button" class="add-btn" onclick="addVariant('beer')">+ Aggiungi confezione</button>
+            </div>
+
+            <!-- Felpa -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0"><b>👕 Felpa "Humilitas"</b><span style="color:#666">€20</span></div>
+              <div id="hoodie-list" class="form-grid"></div>
+              <button type="button" class="add-btn" onclick="addVariant('hoodie')">+ Aggiungi felpa</button>
+            </div>
+
+            <!-- Cappello -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0"><b>🧢 Cappello in lana</b><span style="color:#666">€5</span></div>
+              <div id="beanie-list" class="form-grid"></div>
+              <button type="button" class="add-btn" onclick="addVariant('beanie')">+ Aggiungi cappello</button>
+            </div>
+
+            <!-- Combo -->
+            <div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin:10px 0"><b>✨ Combo felpa + cappello</b><span style="color:#666">€25</span></div>
+              <div id="combo-list" class="form-grid"></div>
+              <button type="button" class="add-btn" onclick="addVariant('combo')">+ Aggiungi combo</button>
+            </div>
+
+            <!-- GDPR -->
+            <div class="field">
+              <label style="display:flex;gap:10px;align-items:center">
+                <input type="checkbox" id="gdpr" required />
+                <span>Acconsento al trattamento dei dati per finalità organizzative della raccolta (GDPR).</span>
+              </label>
+            </div>
+          </form>
+        </div>
+
+        <!-- RIEPILOGO (destra) + invio -->
+        <aside class="summary"><div class="content">
+          <h3 style="margin:0 0 10px 0">Riepilogo</h3>
+          <div id="summary-items" style="color:#666">Nessun prodotto selezionato.</div>
+          <div class="line"></div>
+          <div style="display:flex;justify-content:space-between;font-weight:800"><span>Totale stimato</span><span id="summary-total">€0,00</span></div>
+          <button class="add-btn" id="submit-btn" style="width:100%;margin-top:12px">Invia preordine</button>
+          <div id="form-result" class="alert" style="display:none;margin-top:10px"></div>
+        </div></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAUSA -->
+  <section id="cause" class="cause-band">
+    <div class="cause-grid">
+      <div class="cause-media"></div>
+      <div class="cause-pane" style="background:#111;display:flex;align-items:center">
+        <div class="container">
+          <div class="cause-text">
+            <div class="overline" style="color:#9ad;">Trasparenza</div>
+            <h2>Perché e per cosa raccogliamo</h2>
+            <p>Ogni euro viene destinato a progetti in Terra Santa, con priorità ad assistenza sanitaria di base, sostegno educativo e microprogetti per famiglie vulnerabili. Pubblicheremo un prospetto finale con totale raccolto, costi, importi inviati e ricevute. Ogni preordine è registrato su Google Sheet per la massima tracciabilità.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-brand">
+        <div class="footer-logo">H</div>
+        <div>Via Papa Pio XI, 32 – Venegono Inferiore (VA)</div>
+        <div style="color:#666">© <span id="year"></span> GAMis – Seminario Arcivescovile di Milano</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPT: varianti + invio a Google Sheets ===== -->
+  <script>
+    // Config
+    const PRICES = { beerPack: 15, hoodie: 20, beanie: 5, combo: 25 };
+    const SHEETS_WEBHOOK_URL = "https://script.google.com/macros/s/PASTE_YOUR_WEB_APP_URL/exec"; // Sostituisci con il tuo URL Apps Script
+
+    // Lista seminaristi (esempio)
+    const SEMINARISTI = ["Seminarista A","Seminarista B","Seminarista C"];
+
+    const hoodieModels = { offwhite: ["Arancio","Verdone","Nero"], nero: ["Rosa shocking","Bianco","Celeste"] };
+    const hoodieSizes = ["S","M","L","XL","2XL"];
+
+    const euro = n => new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(n||0);
+    const labelModel = id => id==='offwhite' ? 'Offwhite' : (id==='nero' ? 'Nero' : id);
+    const cap = s => s? s.charAt(0).toUpperCase()+s.slice(1) : s;
+
+    // Footer year
+    const y = document.getElementById('year'); if(y) y.textContent = new Date().getFullYear();
+
+    // Seminaristi datalist + Altro...
+    const datalist = document.getElementById('seminaristi');
+    const seminaristaInput = document.getElementById('seminarista');
+    const seminaristaAltroWrap = document.getElementById('seminarista-altro-wrap');
+    const seminaristaAltro = document.getElementById('seminarista-altro');
+    if(datalist){
+      datalist.innerHTML='';
+      SEMINARISTI.forEach(n=>{ const o=document.createElement('option'); o.value=n; datalist.appendChild(o); });
+      const alt=document.createElement('option'); alt.value='Altro...'; datalist.appendChild(alt);
+    }
+    seminaristaInput && seminaristaInput.addEventListener('input',()=>{
+      if(seminaristaInput.value.trim().toLowerCase()==='altro...'){
+        seminaristaAltroWrap.style.display='block'; seminaristaAltro && seminaristaAltro.focus();
+      } else seminaristaAltroWrap.style.display='none';
+    });
+
+    // Stato multi-varianti
+    const state = { beer:[], hoodie:[], beanie:[], combo:[] };
+
+    function addVariant(type){
+      if(type==='beer') state.beer.push({ qty:1 });
+      if(type==='hoodie') state.hoodie.push({ model:'offwhite', print:'Arancio', size:'M', qty:1 });
+      if(type==='beanie') state.beanie.push({ color:'blu', qty:1 });
+      if(type==='combo') state.combo.push({ model:'offwhite', print:'Arancio', size:'M', color:'blu', qty:1 });
+      renderVariants(type); renderSummary();
+    }
+    function removeVariant(type, idx){ state[type].splice(idx,1); renderVariants(type); renderSummary(); }
+
+    function renderVariants(type){
+      const host = document.getElementById({beer:'beer-list',hoodie:'hoodie-list',beanie:'beanie-list',combo:'combo-list'}[type]);
+      if(!host) return; host.innerHTML='';
+      state[type].forEach((v,idx)=>{
+        const row=document.createElement('div'); row.className='groupbox';
+        if(type==='beer') row.innerHTML = `
+          <div class="group-grid">
+            <div class="field"><label>Quantità confezioni</label><input class="input qty" type="number" min="1" value="${v.qty}"></div>
+            <div class="field" style="grid-column:1/-1"><button type="button" class="remove" onclick="removeVariant('beer',${idx})">🗑 Rimuovi</button></div>
+          </div>`;
+        if(type==='hoodie') row.innerHTML = `
+          <div class="group-grid">
+            <div class="field"><label>Modello</label>
+              <select class="select model">
+                <option value="offwhite" ${v.model==='offwhite'?'selected':''}>Offwhite</option>
+                <option value="nero" ${v.model==='nero'?'selected':''}>Nero</option>
+              </select>
+            </div>
+            <div class="field"><label>Stampa</label><select class="select print"></select></div>
+            <div class="field"><label>Taglia</label>
+              <select class="select size">${hoodieSizes.map(s=>`<option value="${s}" ${v.size===s?'selected':''}>${s}</option>`).join('')}</select>
+            </div>
+            <div class="field"><label>Quantità</label><input class="input qty" type="number" min="1" value="${v.qty}"></div>
+            <div class="field" style="grid-column:1/-1"><button type="button" class="remove" onclick="removeVariant('hoodie',${idx})">🗑 Rimuovi</button></div>
+          </div>`;
+        if(type==='beanie') row.innerHTML = `
+          <div class="group-grid">
+            <div class="field"><label>Colore</label>
+              <select class="select color">
+                <option value="blu" ${v.color==='blu'?'selected':''}>Blu</option>
+                <option value="nero" ${v.color==='nero'?'selected':''}>Nero</option>
+                <option value="grigio" ${v.color==='grigio'?'selected':''}>Grigio</option>
+              </select>
+            </div>
+            <div class="field"><label>Quantità</label><input class="input qty" type="number" min="1" value="${v.qty}"></div>
+            <div class="field" style="grid-column:1/-1"><button type="button" class="remove" onclick="removeVariant('beanie',${idx})">🗑 Rimuovi</button></div>
+          </div>`;
+        if(type==='combo') row.innerHTML = `
+          <div class="group-grid">
+            <div class="field"><label>Felpa – Modello</label>
+              <select class="select model">
+                <option value="offwhite" ${v.model==='offwhite'?'selected':''}>Offwhite</option>
+                <option value="nero" ${v.model==='nero'?'selected':''}>Nero</option>
+              </select>
+            </div>
+            <div class="field"><label>Felpa – Stampa</label><select class="select print"></select></div>
+            <div class="field"><label>Felpa – Taglia</label>
+              <select class="select size">${hoodieSizes.map(s=>`<option value="${s}" ${v.size===s?'selected':''}>${s}</option>`).join('')}</select>
+            </div>
+            <div class="field"><label>Cappello – Colore</label>
+              <select class="select color">
+                <option value="blu" ${v.color==='blu'?'selected':''}>Blu</option>
+                <option value="nero" ${v.color==='nero'?'selected':''}>Nero</option>
+                <option value="grigio" ${v.color==='grigio'?'selected':''}>Grigio</option>
+              </select>
+            </div>
+            <div class="field"><label>Quantità</label><input class="input qty" type="number" min="1" value="${v.qty}"></div>
+            <div class="field" style="grid-column:1/-1"><button type="button" class="remove" onclick="removeVariant('combo',${idx})">🗑 Rimuovi</button></div>
+          </div>`;
+        host.appendChild(row);
+
+        // Bind
+        if(type==='beer'){
+          row.querySelector('.qty').addEventListener('input',e=>{ v.qty=parseInt(e.target.value||'1'); renderSummary(); });
+        }
+        if(type==='hoodie'){
+          const modelSel=row.querySelector('.model');
+          const printSel=row.querySelector('.print');
+          const sizeSel=row.querySelector('.size');
+          function fillPrints(){ printSel.innerHTML=''; (hoodieModels[v.model]||[]).forEach(p=>{ const o=document.createElement('option'); o.value=p; o.textContent=p; printSel.appendChild(o); }); printSel.value = v.print || printSel.options[0].value; v.print = printSel.value; }
+          fillPrints();
+          modelSel.addEventListener('change',e=>{ v.model=e.target.value; fillPrints(); renderSummary(); });
+          printSel.addEventListener('change',e=>{ v.print=e.target.value; renderSummary(); });
+          sizeSel.addEventListener('change',e=>{ v.size=e.target.value; renderSummary(); });
+          row.querySelector('.qty').addEventListener('input',e=>{ v.qty=parseInt(e.target.value||'1'); renderSummary(); });
+        }
+        if(type==='beanie'){
+          row.querySelector('.color').addEventListener('change',e=>{ v.color=e.target.value; renderSummary(); });
+          row.querySelector('.qty').addEventListener('input',e=>{ v.qty=parseInt(e.target.value||'1'); renderSummary(); });
+        }
+        if(type==='combo'){
+          const modelSel=row.querySelector('.model');
+          const printSel=row.querySelector('.print');
+          const sizeSel=row.querySelector('.size');
+          const colorSel=row.querySelector('.color');
+          function fillPrints(){ printSel.innerHTML=''; (hoodieModels[v.model]||[]).forEach(p=>{ const o=document.createElement('option'); o.value=p; o.textContent=p; printSel.appendChild(o); }); printSel.value = v.print || printSel.options[0].value; v.print = printSel.value; }
+          fillPrints();
+          modelSel.addEventListener('change',e=>{ v.model=e.target.value; fillPrints(); renderSummary(); });
+          printSel.addEventListener('change',e=>{ v.print=e.target.value; renderSummary(); });
+          sizeSel.addEventListener('change',e=>{ v.size=e.target.value; renderSummary(); });
+          colorSel.addEventListener('change',e=>{ v.color=e.target.value; renderSummary(); });
+          row.querySelector('.qty').addEventListener('input',e=>{ v.qty=parseInt(e.target.value||'1'); renderSummary(); });
+        }
+      });
+    }
+
+    // Riepilogo + totale
+    function productRows(){
+      const rows=[];
+      state.beer.forEach(b=>{ if((b.qty||0)>0) rows.push({prodotto:'Birra', valore:`Confezione da 3 (x${b.qty})`, prezzo:PRICES.beerPack*b.qty}); });
+      state.hoodie.forEach(h=>{ if((h.qty||0)>0) rows.push({prodotto:'Felpa', valore:`${labelModel(h.model)} \"${h.print} – Taglia ${h.size}\" (${h.qty})`, prezzo:PRICES.hoodie*h.qty}); });
+      state.beanie.forEach(c=>{ if((c.qty||0)>0) rows.push({prodotto:'Cappello', valore:`${cap(c.color)} (${c.qty})`, prezzo:PRICES.beanie*c.qty}); });
+      state.combo.forEach(x=>{ if((x.qty||0)>0) rows.push({prodotto:'Combo', valore:`${labelModel(x.model)} \"${x.print} – Taglia ${x.size}\" + ${cap(x.color)} (${x.qty})`, prezzo:PRICES.combo*x.qty}); });
+      return rows;
+    }
+    function calcTotal(){ return productRows().reduce((s,r)=>s+r.prezzo,0); }
+    function renderSummary(){
+      const box=document.getElementById('summary-items');
+      const rows=productRows();
+      if(!box) return;
+      if(rows.length===0){ box.textContent='Nessun prodotto selezionato.'; }
+      else{ box.innerHTML=''; rows.forEach(r=>{ const line=document.createElement('div'); line.style.display='flex'; line.style.justifyContent='space-between'; line.style.gap='12px'; line.innerHTML=`<span>${r.prodotto}</span><span style=\"color:#666\">${r.valore}</span>`; box.appendChild(line); }); }
+      const totEl=document.getElementById('summary-total'); if(totEl) totEl.textContent=euro(calcTotal());
+    }
+
+    // Submit → Google Sheets
+    const form = document.getElementById('order-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const resultBox = document.getElementById('form-result');
+    submitBtn && submitBtn.addEventListener('click', ()=> form && form.requestSubmit());
+
+    form && form.addEventListener('submit', async (e)=>{
+      e.preventDefault(); if(resultBox) resultBox.style.display='none';
+      const nome = document.getElementById('nome').value.trim();
+      const cognome = document.getElementById('cognome').value.trim();
+      const cellulare = document.getElementById('cellulare').value.trim();
+      let seminaristaSel = document.getElementById('seminarista').value.trim();
+      if(seminaristaSel.toLowerCase()==='altro...' || seminaristaSel==='') seminaristaSel = (document.getElementById('seminarista-altro').value||'').trim();
+      if(!nome || !cognome || !cellulare || !seminaristaSel) return showMsg('Compila tutti i dati del cliente.', true);
+      if(!document.getElementById('gdpr').checked) return showMsg('Per procedere è necessario il consenso GDPR.', true);
+
+      const rows = productRows();
+      if(rows.length===0) return showMsg('Aggiungi almeno un prodotto.', true);
+      const total = euro(calcTotal());
+      const payloadRows = rows.map(r=>({
+        nome, cognome, cellulare, seminarista: seminaristaSel,
+        Birra: r.prodotto==='Birra'? r.valore : '',
+        Felpa: r.prodotto==='Felpa'? r.valore : '',
+        Cappello: r.prodotto==='Cappello'? r.valore : '',
+        Combo: r.prodotto==='Combo'? r.valore : '',
+        Totale: total
+      }));
+
+      submitBtn.disabled=true; submitBtn.textContent='Invio in corso...';
+      try{
+        const res = await fetch(SHEETS_WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ rows: payloadRows }) });
+        const data = await res.json().catch(()=>({ ok:false }));
+        if(res.ok && data?.ok!==false){ showMsg('Ordine registrato! Ti invieremo un riepilogo.'); form.reset(); ['beer','hoodie','beanie','combo'].forEach(t=>state[t]=[]); renderSummary(); }
+        else showMsg("C'è stato un problema nel salvataggio. Controlla l'URL dell'App Script e riprova.", true);
+      } catch(err){ showMsg('Connessione non riuscita. Verifica la rete o il tuo Apps Script.', true); }
+      finally{ submitBtn.disabled=false; submitBtn.textContent='Invia preordine'; }
+    });
+
+    function showMsg(txt, error=false){ if(!resultBox) return; resultBox.className = 'alert'+(error?' error':''); resultBox.textContent = txt; resultBox.style.display='block'; }
+  </script>
+</body>
+</html>
