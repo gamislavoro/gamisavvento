@@ -431,7 +431,7 @@
 
       submitBtn.disabled=true; submitBtn.textContent='Invio in corso...';
       try{
-        const res = await fetch(SHEETS_WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ rows: payloadRows }) });
+        const res = await fetch(SHEETS_WEBHOOK_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify({ rows: payloadRows }) });
         const data = await res.json().catch(()=>({ ok:false }));
         if(res.ok && data?.ok!==false){ showMsg('Ordine registrato! Ti invieremo un riepilogo.'); form.reset(); ['beer','hoodie','beanie','combo'].forEach(t=>state[t]=[]); renderSummary(); }
         else showMsg("C'è stato un problema nel salvataggio. Controlla l'URL dell'App Script e riprova.", true);
