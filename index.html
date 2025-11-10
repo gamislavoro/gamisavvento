@@ -38,15 +38,15 @@
     h2{font-size:clamp(22px,4vw,36px);margin:0 0 6px 0}
     .overline{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#888}
 
-    /* Catalogo */
-    .look{display:grid;gap:14px;grid-template-columns:repeat(8,1fr)}
+   /* Catalogo */
+    .look{display:grid;gap:14px;grid-template-columns:repeat(2,1fr);} 
     .tile{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;transition:transform .2s ease, box-shadow .2s ease}
     .tile:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.06)}
-    .tile img{aspect-ratio:3/2;object-fit:cover;max-height:240px}
+    .tile img{aspect-ratio:3/2;object-fit:cover;height:auto;} 
     .tile .cap{position:absolute;inset:auto 10px 10px 10px;display:flex;justify-content:space-between;align-items:flex-end;color:#111}
     .cap h3{margin:0;font-weight:900;background:#fff;padding:6px 10px;border-radius:10px;font-size:14px;max-width:75%}
     .cap .price{background:#111;color:#fff;font-weight:800;padding:6px 10px;border-radius:999px;font-size:12px}
-    .span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-3{grid-column:span 3}
+    .span-6{grid-column:span 6}.span-5{grid-column:span 5}.span-4{grid-column:span 4}.span-3{grid-column:span 3}.span-2{grid-column:span 2}
 
     /* Form */
     .grid-2{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -75,7 +75,30 @@
     .footer-logo{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:#000;color:#fff;font-weight:900}
 
     @media (max-width:980px){
-      .look{grid-template-columns:repeat(2,1fr)}
+      .look{grid-template-columns:1fr;}
+      .grid-2{grid-template-columns:1fr}
+      .summary{position:static}
+      .hero-inner{text-align:center}
+      .cause-grid{grid-template-columns:1fr !important}
+      .cause-media{order:1; min-height:220px; height:220px}
+      .cause-pane{order:2}
+      .container{padding:0 24px}
+      header.site .nav{padding:0 24px}
+      .cause-text{max-width:100%; width:100%; padding:28px 20px}
+    }
+      .span-6,.span-5,.span-4,.span-3,.span-2{grid-column:span 2}
+      .grid-2{grid-template-columns:1fr}
+      .summary{position:static}
+      .hero-inner{text-align:center}
+      .cause-grid{grid-template-columns:1fr !important}
+      .cause-media{order:1; min-height:220px; height:220px}
+      .cause-pane{order:2}
+      /* margini mobile più larghi */
+      .container{padding:0 24px}
+      header.site .nav{padding:0 24px}
+      /* testo causa full width e senza overflow */
+      .cause-text{max-width:100%; width:100%; padding:28px 20px}
+    }
       .span-5,.span-4,.span-3{grid-column:span 2}
       .grid-2{grid-template-columns:1fr}
       .summary{position:static}
@@ -118,10 +141,10 @@
       <div class="overline">Catalogo</div>
       <h2>Prodotti in preordine</h2>
       <div class="look" style="margin-top:16px">
-        <article class="tile span-4"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop" alt="Felpa Humilitas" /><div class="cap"><h3>Felpa "Humilitas"</h3><span class="price">€20</span></div></article>
-        <article class="tile span-4"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Cappello" /><div class="cap"><h3>Cappello in lana</h3><span class="price">€5</span></div></article>
-        <article class="tile span-5"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1600&auto=format&fit=crop" alt="Combo felpa+cappello" /><div class="cap"><h3>Combo Felpa + Cappello</h3><span class="price">€25</span></div></article>
-        <article class="tile span-3"><img src="https://images.unsplash.com/photo-1532634896-26909d0d4b6a?q=80&w=1600&auto=format&fit=crop" alt="Birra artigianale" /><div class="cap"><h3>Birra (x3)</h3><span class="price">€15</span></div></article>
+        <article class="tile"><img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop" alt="Felpa Humilitas" /><div class="cap"><h3>Felpa \"Humilitas\"</h3><span class="price">€20</span></div></article>
+        <article class="tile"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Cappello" /><div class="cap"><h3>Cappello in lana</h3><span class="price">€5</span></div></article>
+        <article class="tile"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1600&auto=format&fit=crop" alt="Combo felpa+cappello" /><div class="cap"><h3>Combo Felpa + Cappello</h3><span class="price">€25</span></div></article>
+        <article class="tile"><img src="https://images.unsplash.com/photo-1532634896-26909d0d4b6a?q=80&w=1600&auto=format&fit=crop" alt="Birra artigianale" /><div class="cap"><h3>Birra (x3)</h3><span class="price">€15</span></div></article>
       </div>
     </div>
   </section>
