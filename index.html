@@ -72,8 +72,9 @@
 
     footer{border-top:1px solid var(--line);padding:34px 0;color:#222;font-size:14px}
     .footer-brand{display:flex;flex-direction:column;gap:10px;align-items:center;text-align:center;margin:0 auto}
-    .footer-logo{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;background:#000;color:#fff;font-weight:900}
-
+    .footer-logo{height:40px;object-fit:cover}
+    @media {{.footer .logo-img{width:auto;height:38px}}
+    
     @media (max-width:980px){
       .look{grid-template-columns:1fr}
       .span-5,.span-4,.span-3{grid-column:span 2}
