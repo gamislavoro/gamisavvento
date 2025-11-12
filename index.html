@@ -448,7 +448,7 @@
 
       const join = arr => arr.filter(Boolean).join(' ; ');
       const birraTot = (state.beer||[]).reduce((s,v)=> s + (parseInt(v.qty||0)||0), 0);
-      const cellBirra = birraTot>0 ? `Confezione da 3 (x${birraTot})` : '';
+      const cellBirra = birraTot>0 ? `${birraTot}` : '';
       const cellFelpa = join((state.hoodie||[]).filter(h=> (h.qty||0)>0).map(h=> `${labelModel(h.model)} "${h.print} – Taglia ${h.size}" (${h.qty})`));
       const cellCappello = join((state.beanie||[]).filter(c=> (c.qty||0)>0).map(c=> `${cap(c.color)} (${c.qty})`));
       const cellCombo = join((state.combo||[]).filter(x=> (x.qty||0)>0).map(x=> `${labelModel(x.model)} "${x.print} – Taglia ${x.size}" + ${cap(x.color)} (${x.qty})`));
