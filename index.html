@@ -403,7 +403,7 @@
 
     function productRows(){
       const rows=[];
-      state.beer.forEach(b=>{ if((b.qty||0)>0) rows.push({prodotto:'Birra', valore:`Confezione da 3 (x${b.qty})`, prezzo:PRICES.beerPack*b.qty}); });
+      state.beer.forEach(b=>{ if((b.qty||0)>0) rows.push({prodotto:'Birra', valore:`${b.qty}`, prezzo:PRICES.beerPack*b.qty}); });
       state.hoodie.forEach(h=>{ if((h.qty||0)>0) rows.push({prodotto:'Felpa', valore:`${labelModel(h.model)} \"${h.print} – Taglia ${h.size}\" (${h.qty})`, prezzo:PRICES.hoodie*h.qty}); });
       state.beanie.forEach(c=>{ if((c.qty||0)>0) rows.push({prodotto:'Cappello', valore:`${cap(c.color)} (${c.qty})`, prezzo:PRICES.beanie*c.qty}); });
       state.combo.forEach(x=>{ if((x.qty||0)>0) rows.push({prodotto:'Combo', valore:`${labelModel(x.model)} \"${x.print} – Taglia ${x.size}\" + ${cap(x.color)} (${x.qty})`, prezzo:PRICES.combo*x.qty}); });
