@@ -452,8 +452,19 @@
     const resultBox = document.getElementById('form-result');
     submitBtn && submitBtn.addEventListener('click', ()=> form && form.requestSubmit());
 
+    // --- INTERRUTTORE PREORDINI ---
+    const PREORDINI_CHIUSI = true; // <-- IMPOSTA SU 'true' PER CHIUDERE
+    // ------------------------------
+    
     form && form.addEventListener('submit', (e)=>{
       e.preventDefault(); if(resultBox) resultBox.style.display='none';
+
+      // *** BLOCCO QUI ***
+      if (PREORDINI_CHIUSI) {
+          submitBtn.disabled = true;
+          return showMsg('I preordini sono chiusi e non è più possibile inviare ordini.', true);
+      }
+      
       const nome = document.getElementById('nome').value.trim();
       const cognome = document.getElementById('cognome').value.trim();
       const cellulare = document.getElementById('cellulare').value.trim();
